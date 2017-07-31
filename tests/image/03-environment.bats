@@ -27,3 +27,63 @@
   run test -n "${CASSANDRA_VERSION}"
   [ $status -eq 0 ]
 }
+
+@test "directory '/var/lib/cassandra/data' dir has proper permissions" {
+
+  dir="/var/lib/cassandra/data"
+  user="cassandra"
+  group="cassandra"
+
+  # Check the owner
+  owner=$(stat -c %U  "${dir}")
+  [ "${owner}" == "${user}" ]
+
+  # Check the group
+  group=$(stat -c %U  "${dir}")
+  [ "$group" == "${group}" ]
+
+  # Check the directory is writable
+  status=$(test -w "${dir}"; echo $?)
+  [ "$status" == 0 ]
+
+}
+
+@test "directory '/var/lib/cassandra/commitlog' dir has proper permissions" {
+
+  dir="/var/lib/cassandra/commitlog"
+  user="cassandra"
+  group="cassandra"
+
+  # Check the owner
+  owner=$(stat -c %U  "${dir}")
+  [ "${owner}" == "${user}" ]
+
+  # Check the group
+  group=$(stat -c %U  "${dir}")
+  [ "$group" == "${group}" ]
+
+  # Check the directory is writable
+  status=$(test -w "${dir}"; echo $?)
+  [ "$status" == 0 ]
+
+}
+
+@test "directory '/var/lib/cassandra/saved_caches' dir has proper permissions" {
+
+  dir="/var/lib/cassandra/saved_caches"
+  user="cassandra"
+  group="cassandra"
+
+  # Check the owner
+  owner=$(stat -c %U  "${dir}")
+  [ "${owner}" == "${user}" ]
+
+  # Check the group
+  group=$(stat -c %U  "${dir}")
+  [ "$group" == "${group}" ]
+
+  # Check the directory is writable
+  status=$(test -w "${dir}"; echo $?)
+  [ "$status" == 0 ]
+
+}
