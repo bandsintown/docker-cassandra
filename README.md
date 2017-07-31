@@ -1,6 +1,6 @@
 # Supported tags and respective `Dockerfile` links
 
--	[`2.1.18`](https://github.com/bandsintown/cassandra/blob/a78f0c2c40507f31a6b5048d029e77f5e3e5054b/2.1/Dockerfile)
+-	[`2.1.18`](https://github.com/bandsintown/docker-cassandra/blob/a78f0c2c40507f31a6b5048d029e77f5e3e5054b/2.1/Dockerfile)
 
 
 # What is Cassandra?
