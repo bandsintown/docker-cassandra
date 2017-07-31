@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+
+  # Consul
+  consul:
+    image: consul:0.7.5
+    command: "agent -dev -client 0.0.0.0 -ui"
+    container_name: consul
+    ports:
+      - 8301
+      - 8500
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+      - SERVICE_IGNORE=true
+
+  # Registrator
+  registrator:
+    image: nhuray/registrator:v7
+    command: "-internal consul://consul:8500"
+    container_name: registrator
+    depends_on:
+      - consul
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+
+  # Consulator
+  consulator:
+    image: lewispeckover/consulator
+    command: "sync -prefix=service /app/consulator.yml"
+    depends_on:
+      - consul
+    volumes:
+      - ./consulator.yml:/app/consulator.yml
+    environment:
+      - CONSUL_HTTP_ADDR=consul:8500
+
+  # Cassandra
+  cassandra:
+    image: bandsintown/cassandra:2.1.18
+    depends_on:
+      - consul
+      - consulator
+    command: consul-template -config /etc/consul-template/conf
+    environment:
+      - CASSANDRA_SEEDS_PER_DC=3
+      - CONSUL_HTTP_ADDR=consul:8500
+      - SERVICE_7000_IGNORE=true
+      - SERVICE_7001_IGNORE=true
+      - SERVICE_7199_IGNORE=true
+      - SERVICE_9042_IGNORE=true
+      - SERVICE_9160_NAME=cassandra
+    ports:
+      - 7000
+      - 7001
+      - 7199
+      - 9042
+      - 9160
