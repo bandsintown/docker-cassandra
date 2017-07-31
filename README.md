@@ -11,6 +11,16 @@ Apache Cassandra is an open source distributed database management system design
 
 ![logo](https://raw.githubusercontent.com/bandsintown/docs/master/cassandra/logo.png)
 
+# Motivation
+
+This image is derived from the [Official Cassandra image]() bundling [Consul](https://www.consul.io/) and [Consul Template](https://github.com/hashicorp/consul-template).
+ 
+[Consul](https://www.consul.io/) is a service discovery tool and is used in this image to dynamically discover the other cassandra nodes in order to define those nodes as Cassandra seeds. 
+The configuration is created at the container startup and is managed by [Consul Template](https://github.com/hashicorp/consul-template)
+
+[Consul Template](https://github.com/hashicorp/consul-template) allows to change dynamically the Cassandra configuration as well, without rebundling and redeploying an image.
+  
+
 # How to use this image
 
 ## Start a `cassandra` server instance
@@ -63,7 +73,38 @@ $ docker run --name some-cassandra -d -e CASSANDRA_BROADCAST_ADDRESS=10.43.43.43
 
 ## Make a cluster with Consul
 
+This image bundle [Consul Template](https://github.com/hashicorp/consul-template) to create the Cassandra configuration at startup. The configuration can also be changed just setting keys in Consul.
 
+This project has a `docker-compose.yml` file defining a Cassandra service running along Consul. 
+
+To use it just create the services:
+
+```console
+$ docker-compose up -d
+```
+
+Then scale the cassandra cluster to the number of nodes desired:
+ 
+```console
+$ docker-compose scale cassandra=3
+``` 
+
+When all nodes are up and running you can chck the cluster is created properly: 
+
+```console
+$ docker-compose exec cassandra nodetool status
+
+root@/etc/cassandra > nodetool status
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address     Load       Tokens  Owns (effective)  Host ID                               Rack
+UN  172.21.0.6  61.24 KB   256     69.3%             1d0ea42f-199d-4b26-bb17-1a878ac16740  rack1
+UN  172.21.0.5  171.4 KB   256     68.1%             4785f6bc-3c59-4f4b-8da7-14a61e2370d9  rack1
+UN  172.21.0.4  82.52 KB   256     62.6%             40a505e9-bf80-498f-bc9a-39aeec5539bb  rack1
+
+``` 
 
 ## Connect to Cassandra from `cqlsh`
 
