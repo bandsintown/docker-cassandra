@@ -168,8 +168,9 @@ This variable is the comma-separated list of IP addresses used by gossip for boo
 
 ### `CASSANDRA_SEEDS_PER_DC`
 
-This variable defined the number of node to query from [Consul](https://www.consul.io/) in order to defined the `seeds` value of the [`seed_provider`](http://docs.datastax.com/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html?scroll=configCassandra_yaml__seed_provider) option in `cassandra.yaml`. The `CASSANDRA_BROADCAST_ADDRESS` will be added the the seeds passed in so that the sever will talk to itself as well.
+This variable defined the number of `cassandra` service to query in each Datacenter from [Consul](https://www.consul.io/) in order to defined the `seeds` value of the [`seed_provider`](http://docs.datastax.com/en/cassandra/3.0/cassandra/configuration/configCassandra_yaml.html?scroll=configCassandra_yaml__seed_provider) option in `cassandra.yaml`. The `CASSANDRA_BROADCAST_ADDRESS` will be added the the seeds passed in so that the sever will talk to itself as well.
 Please see the `docker-compose.yml` for an example.
+Please note we never tested this configuration in a multi-datacenter environment.
 
 ### `CASSANDRA_CLUSTER_NAME`
 
