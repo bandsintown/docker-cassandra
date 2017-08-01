@@ -93,7 +93,7 @@ Then scale the cassandra cluster to the number of nodes desired:
 $ docker-compose scale cassandra=3
 ``` 
 
-When all nodes are up and running you can chck the cluster is created properly: 
+When all nodes are up and running you can verify the cluster is created properly: 
 
 ```console
 $ docker-compose exec cassandra nodetool status

@@ -263,7 +263,7 @@ seed_provider:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
           {{ if (env "CASSANDRA_SEEDS_PER_DC") }}{{ $seeds_per_dc := parseInt (env "CASSANDRA_SEEDS_PER_DC") }}
-          - seeds: "{{ range $dc_index, $dc := datacenters }}{{if ne $dc_index 0 }},{{ end }}{{ range $index, $service := service (print $service_name "@" $dc) }}{{if (lt $index $seeds_per_dc) }}{{if ne $index 0 }},{{ end }}{{ .Address }}{{ end }}{{ end }}{{ end }}"
+          - seeds: "{{ range $dc_index, $dc := datacenters }}{{if ne $dc_index 0 }},{{ end }}{{ range $index, $service := service (print $service_name "@" $dc "|any") }}{{if (lt $index $seeds_per_dc) }}{{if ne $index 0 }},{{ end }}{{ .Address }}{{ end }}{{ end }}{{ end }}"
           {{ else }}
           - seeds: "{{ env "CASSANDRA_SEEDS" }}"
           {{ end }}

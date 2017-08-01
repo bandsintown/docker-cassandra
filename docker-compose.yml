@@ -52,9 +52,18 @@ services:
       - SERVICE_7199_IGNORE=true
       - SERVICE_9042_IGNORE=true
       - SERVICE_9160_NAME=cassandra
+      - SERVICE_9160_CHECK_TCP=true
+      - SERVICE_9160_CHECK_INTERVAL=15s
+      - SERVICE_9160_CHECK_TIMEOUT=5s
     ports:
       - 7000
       - 7001
       - 7199
       - 9042
       - 9160
+    ulimits:
+      memlock: 65536
+      nproc: 65536
+      nofile:
+        soft: 65536
+        hard: 65536
