@@ -1,6 +1,10 @@
-# Supported tags and respective `Dockerfile` links
+[![dockeri.co](http://dockeri.co/image/bandsintown/cassandra)](https://hub.docker.com/r/bandsintown/cassandra/)
 
--	[`2.1.18`](https://github.com/bandsintown/docker-cassandra/blob/a78f0c2c40507f31a6b5048d029e77f5e3e5054b/2.1/Dockerfile)
+[![Build status](https://badge.buildkite.com/f78e045c0b561ba33f80f3c996ccfe89b49ade24b832f92bfd.svg)](https://buildkite.com/bandsintown/docker-cassandra)
+[![GitHub issues](https://img.shields.io/github/issues/bandsintown/docker-cassandra.svg "GitHub issues")](https://github.com/bandsintown/docker-cassandra)
+[![GitHub stars](https://img.shields.io/github/stars/bandsintown/docker-cassandra.svg "GitHub stars")](https://github.com/bandsintown/docker-cassandra)
+[![Docker layers](https://images.microbadger.com/badges/image/bandsintown/cassandra.svg)](http://microbadger.com/images/bandsintown/cassandra)
+	
 
 
 # What is Cassandra?
