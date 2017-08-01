@@ -44,6 +44,8 @@ services:
     command: consul-template -config /etc/consul-template/conf
     environment:
       - CASSANDRA_SEEDS_PER_DC=3
+      - CASSANDRA_LISTEN_ADDRESS=auto
+      - CASSANDRA_BROADCAST_ADDRESS=auto
       - CONSUL_HTTP_ADDR=consul:8500
       - SERVICE_7000_IGNORE=true
       - SERVICE_7001_IGNORE=true

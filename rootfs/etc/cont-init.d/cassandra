@@ -1,5 +1,8 @@
-#!/bin/bash
-set +x
+#!/usr/bin/with-contenv bash
+
+if [[ "$VERBOSE" = "yes" ]]; then
+    set -x
+fi
 
 # Create directories
 mkdir -p /var/lib/cassandra/data /var/lib/cassandra/commitlog /var/lib/cassandra/saved_caches
@@ -13,7 +16,6 @@ if [ -n "${EC2_IP}" ]; then
 fi
 
 # Cassandra Default Configuration
-: ${CASSANDRA_CONFIG='/etc/cassandra'}
 : ${CASSANDRA_RPC_ADDRESS='0.0.0.0'}
 
 : ${CASSANDRA_LISTEN_ADDRESS='auto'}
